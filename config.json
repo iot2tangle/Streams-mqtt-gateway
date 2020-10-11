@@ -1,5 +1,5 @@
 {
-    "device_name": "XDK_HTTP",
+    "device_name": "DEVICE_ID",
     "broker_ip": "localhost",
     "broker_port": 1883,
     "topic": "iot2tangle",

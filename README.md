@@ -20,7 +20,7 @@ In case you don't have a MQTT broker running yet, you can run one locally with M
 
 Download the Repository:  
 
-`git clone https://github.com/iot2tangle/Streams-mqtt-gateway.git`
+`git clone https://github.com/iot2tangle/streams-mqtt-gateway.git`
   
 Configure the streams-gateway:  
 
@@ -52,4 +52,4 @@ The Output will be something like this:
  
 
 To send data to the server you can use cURL, make sure the ip and port are the same as in the config.json file, and that they point to the broker:  
-`mosquitto_pub -h localhost -p 1883 -t "iot2tangle" -m '{ "iot2tangle": [ { "sensor": "Gyroscope", "data": [ { "x": "4514" }, { "y": "244" }, { "z": "-1830" } ] }, { "sensor": "Acoustic", "data": [ { "mp": "1" } ] } ], "device": "XDK_HTTP", "timestamp": "" }'`
+`mosquitto_pub -h localhost -p 1883 -t "iot2tangle" -m '{ "iot2tangle": [ { "sensor": "Gyroscope", "data": [ { "x": "4514" }, { "y": "244" }, { "z": "-1830" } ] }, { "sensor": "Acoustic", "data": [ { "mp": "1" } ] } ], "device": "DEVICE_ID", "timestamp": "" }'`
