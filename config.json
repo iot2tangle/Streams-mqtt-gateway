@@ -1,0 +1,9 @@
+{
+    "device_name": "XDK_HTTP",
+    "broker_ip": "localhost",
+    "broker_port": 1883,
+    "topic": "iot2tangle",
+    "node": "https://nodes.iota.cafe:443",
+    "mwm": 14,
+    "local_pow": false
+}

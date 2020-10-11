@@ -1,0 +1,1 @@
+mosquitto_pub -h localhost -p 1883 -t "iot2tangle" -m '{ "iot2tangle": [ { "sensor": "Gyroscope", "data": [ { "x": "4514" }, { "y": "244" }, { "z": "-1830" } ] }, { "sensor": "Acoustic", "data": [ { "mp": "1" } ] } ], "device": "XDK_HTTP", "timestamp": "" }'
