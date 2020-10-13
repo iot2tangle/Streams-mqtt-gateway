@@ -1,5 +1,4 @@
-use crate::authenticate;
-use crate::security::keystore::{calculate_hash, KeyManager};
+use crate::device_auth::keystore::{authenticate, calculate_hash, KeyManager};
 use crate::timestamp_in_sec;
 use crate::types::sensor_data::SensorData;
 use std::sync::{Arc, Mutex};
@@ -26,7 +25,7 @@ pub async fn handle_sensor_data(
                 .lock()
                 .expect("lock keystore")
                 .keystore
-                .api_key_author
+                .api_keys_author
                 .clone();
             if authenticate(&sensor_data.device, hash.clone()) {
                 sensor_data.device.to_string().push_str("_id");
@@ -40,7 +39,7 @@ pub async fn handle_sensor_data(
                 match channel
                     .write_signed(PayloadBuilder::new().public(&sensor_data).unwrap().build())
                 {
-                    Ok(_) => (),
+                    Ok(msg_id) => println!("{:?}", msg_id),
                     Err(_e) => {
                         println!(
                             "POST /sensor_data Error: Malformed json, use iot2tangle json format"

@@ -13,8 +13,11 @@ Make sure you also have the build dependencies installed, if not run:
 ## Installing the MQTT broker
 In case you don't have a MQTT broker running yet, you can run one locally with Mosquitto:  
 `sudo apt install mosquitto`  
+
+If you don't want to set authentication for users run:  
 `mosquitto`  
 
+To enable authentication through usernames and passwords, follow the steps in [this guide](http://www.steves-internet-guide.com/mqtt-username-password-example/) 
 
 ## Installing the streams-mqtt-gateway
 
@@ -26,14 +29,16 @@ Configure the streams-gateway:
 
 `nano config.json`  
  
-Set the *device_name* to the value specified in the configuration file of the Device.  
+Set the *device_name* to the value specified in the configuration file of the Device. 
+Leave *username, password* empty ("") if your borker does not require authentication.      
+Set the *username, password* if you are connecting to an authenticaded broker.    
 Set the *borker_ip, broker_port* to match the location on the broker, (default MQTT port is 1883).  
 Change *topic, node, mwm, local_pow* if needed 
 
 
 
   
-## Runnig the Examples:  
+## Runnig the Gateway:  
   
 Run the streams-gateway:  
 
@@ -52,4 +57,5 @@ The Output will be something like this:
  
 
 To send data to the server you can use cURL, make sure the ip and port are the same as in the config.json file, and that they point to the broker:  
-`mosquitto_pub -h localhost -p 1883 -t "iot2tangle" -m '{ "iot2tangle": [ { "sensor": "Gyroscope", "data": [ { "x": "4514" }, { "y": "244" }, { "z": "-1830" } ] }, { "sensor": "Acoustic", "data": [ { "mp": "1" } ] } ], "device": "DEVICE_ID", "timestamp": "" }'`
+`mosquitto_pub -h localhost -p 1883 -u -P  -t "iot2tangle" -m '{ "iot2tangle": [ { "sensor": "Gyroscope", "data": [ { "x": "4514" }, { "y": "244" }, { "z": "-1830" } ] }, { "sensor": "Acoustic", "data": [ { "mp": "1" } ] } ], "device": "DEVICE_ID_1", "timestamp": "" }'`  
+Set values for *-u* *-P* to spsecify the username and the password for an authenticated broker  

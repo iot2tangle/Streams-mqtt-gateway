@@ -1,6 +1,6 @@
 ///
 /// server providing the endpoint for the data
-pub mod stream_server;
+pub mod mqtt_client;
 
 ///
 /// handling of requests sent to server

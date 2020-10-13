@@ -4,9 +4,11 @@ use serde::{Deserialize, Serialize};
 
 use std::fs::File;
 
+static PATH: &str = "src/device_auth/keystore.json";
+
 #[derive(Debug, Deserialize, Serialize)]
 pub struct Keystore {
-    pub api_key_author: String,
+    pub api_keys_author: Vec<String>,
 }
 
 #[derive(Debug)]
@@ -18,9 +20,14 @@ impl KeyManager {
     ///
     /// generates a new Keystore object by hashing the plaintext key and stroing it localy
     ///
-    pub fn new(new_key_aut: String) -> KeyManager {
+    pub fn new(new_keys_auth: Vec<String>) -> KeyManager {
+        let mut hash_list = vec![];
+        for key in new_keys_auth {
+            hash_list.push(calculate_hash(key));
+        }
+
         let keystore = Keystore {
-            api_key_author: calculate_hash(new_key_aut),
+            api_keys_author: hash_list.clone(),
         };
 
         store_keystore(&keystore);
@@ -32,8 +39,7 @@ impl KeyManager {
     /// recreates the API key struct from local storeg
     ///
     pub fn restore() -> KeyManager {
-        let rec: Keystore =
-            serde_json::from_reader(File::open("src/security/keystore.json").unwrap()).unwrap();
+        let rec: Keystore = serde_json::from_reader(File::open(PATH).unwrap()).unwrap();
         KeyManager { keystore: rec }
     }
 }
@@ -42,11 +48,7 @@ impl KeyManager {
 /// stores the current keystore in a local file
 ///
 fn store_keystore(keystore: &Keystore) -> () {
-    serde_json::to_writer(
-        &File::create("src/security/keystore.json").unwrap(),
-        keystore,
-    )
-    .unwrap();
+    serde_json::to_writer(&File::create(PATH).unwrap(), keystore).unwrap();
 }
 
 ///
@@ -57,4 +59,16 @@ pub fn calculate_hash(t: String) -> String {
     hasher.input_str(&t);
     let hex = hasher.result_str();
     hex
+}
+
+///
+/// Verify that the key provided matches one of the whitelited hashes
+///
+pub fn authenticate(key: &str, hashes: Vec<String>) -> bool {
+    for hash in hashes {
+        if calculate_hash(key.to_string()) == hash {
+            return true;
+        }
+    }
+    return false;
 }

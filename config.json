@@ -1,5 +1,10 @@
 {
-    "device_name": "DEVICE_ID",
+    "whitelisted_device_ids": [
+        "DEVICE_ID_1",
+        "DEVICE_ID_2"
+    ],
+    "username": "",
+    "password": "",
     "broker_ip": "localhost",
     "broker_port": 1883,
     "topic": "iot2tangle",
