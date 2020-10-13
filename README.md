@@ -29,7 +29,7 @@ Configure the streams-gateway:
 
 `nano config.json`  
  
-Set the *device_name* to the value specified in the configuration file of the Device.   
+Set the *whitelisted_device_ids* to include all the device IDs specified in their respective configuration files.   
 Leave *username, password* empty ("") if your borker does not require authentication.      
 Set the *username, password* if you are connecting to an authenticaded broker.    
 Set the *borker_ip, broker_port* to match the location on the broker, (default MQTT port is 1883).  
