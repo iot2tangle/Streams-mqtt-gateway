@@ -4,7 +4,6 @@ use crate::types::sensor_data::SensorData;
 use std::sync::{Arc, Mutex};
 
 use gateway_core::gateway::publisher::Channel;
-use gateway_core::payload::payload_serializer::json::PayloadBuilder;
 
 ///
 /// Handles the reuqest from the sensor by parsing the provieded data into the SensorData Format.
@@ -36,9 +35,7 @@ pub async fn handle_sensor_data(
                     timestamp_in_sec()
                 );
                 let mut channel = channel.lock().unwrap();
-                match channel
-                    .write_signed(PayloadBuilder::new().public(&sensor_data).unwrap().build())
-                {
+                match channel.write_signed(&sensor_data) {
                     Ok(msg_id) => println!("{:?}", msg_id),
                     Err(_e) => {
                         println!(

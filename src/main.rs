@@ -22,7 +22,7 @@ async fn main() -> () {
     send_opt.local_pow = config.local_pow;
 
     let channel = Arc::new(Mutex::new(Channel::new(config.node, send_opt, None)));
-    let (addr, _) = channel.lock().expect("").open().unwrap();
+    let addr = channel.lock().expect("").open().unwrap();
     println!("Channel root: {:?}", addr);
     println!("\n To read the messages copy the channel root into http://iot2tangle.link/ \n ");
 
