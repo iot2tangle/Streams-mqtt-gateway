@@ -17,7 +17,7 @@ pub async fn start(
     channel: Arc<Mutex<Channel>>,
     keystore: Arc<Mutex<KeyManager>>,
 ) -> () {
-    let mqtt_options = MqttOptions::new("iot2tangle_broker", broker_ip.clone(), broker_port)
+    let mqtt_options = MqttOptions::new("iot2tangle", broker_ip.clone(), broker_port)
         .set_security_opts(SecurityOptions::UsernamePassword(userame, password));
     let (mut mqtt_client, notifications) = MqttClient::start(mqtt_options).unwrap();
 

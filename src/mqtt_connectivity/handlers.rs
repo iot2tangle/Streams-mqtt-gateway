@@ -16,8 +16,8 @@ pub async fn handle_sensor_data(
     keystore: &Arc<Mutex<KeyManager>>,
 ) -> () {
     let data = data.to_owned();
-
-    let json_data: serde_json::Result<SensorData> = serde_json::from_slice(&data);
+    let clean_str = std::str::from_utf8(&data).unwrap().replace("\u{0}", "");
+    let json_data: serde_json::Result<SensorData> = serde_json::from_str(&clean_str);
     match json_data {
         Ok(mut sensor_data) => {
             let hash = keystore
@@ -39,7 +39,7 @@ pub async fn handle_sensor_data(
                     Ok(msg_id) => println!("{:?}", msg_id),
                     Err(_e) => {
                         println!(
-                            "POST /sensor_data Error: Malformed json, use iot2tangle json format"
+                            "POST /sensor_data Error: Could not send data to Tangle, try switching nodes"
                         );
                         ()
                     }
@@ -52,7 +52,10 @@ pub async fn handle_sensor_data(
             }
         }
         Err(_e) => {
-            ();
+            println!(
+                "POST /sensor_data -- {:?} -- incorrectly formatted Data",
+                timestamp_in_sec()
+            );
         }
     }
     ()
