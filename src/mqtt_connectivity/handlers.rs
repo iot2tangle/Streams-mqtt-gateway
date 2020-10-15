@@ -31,40 +31,30 @@ pub async fn handle_sensor_data(
                 sensor_data.device = calculate_hash(sensor_data.device);
                 sensor_data.timestamp = serde_json::Value::from(timestamp_in_sec());
                 println!(
-                    "POST /sensor_data -- {:?} -- authorized request by device",
+                    "New Message Recieved -- {:?} -- authorized request by device",
                     timestamp_in_sec()
                 );
                 let mut channel = channel.lock().unwrap();
                 match channel.write_signed(&sensor_data) {
                     Ok(msg_id) => println!("{:?}", msg_id),
                     Err(_e) => {
-                        println!(
-                            "POST /sensor_data Error: Could not send data to Tangle, try switching nodes"
-                        );
+                        println!("Error: Could not send data to Tangle, try switching nodes");
                         ()
                     }
                 };
             } else {
                 println!(
-                    "POST /sensor_data -- {:?} -- unauthorized request blocked",
+                    "New Message Recieved -- {:?} -- unauthorized request blocked",
                     timestamp_in_sec()
                 )
             }
         }
         Err(_e) => {
             println!(
-                "POST /sensor_data -- {:?} -- incorrectly formatted Data",
+                "New Message Recieved -- {:?} -- incorrectly formatted Data",
                 timestamp_in_sec()
             );
         }
     }
     ()
 }
-
-/*
-fn send_response(mqtt_client: &mut MqttClient, payload: String) -> () {
-    mqtt_client
-        .publish("response", QoS::AtLeastOnce, false, payload)
-        .unwrap();
-}
-*/
