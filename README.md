@@ -7,6 +7,7 @@ Make sure you also have the build dependencies installed, if not run:
 `sudo apt install build-essential`  
 `sudo apt install pkg-config`  
 `sudo apt install libssl-dev`  
+`sudo apt install cmake`  
 `sudo apt update`  
 
 
