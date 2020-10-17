@@ -1,5 +1,6 @@
 use crate::device_auth::keystore::KeyManager;
 use crate::mqtt_connectivity::handlers::handle_sensor_data;
+use crate::types::static_topic::StaticTopic;
 use gateway_core::gateway::publisher::Channel;
 
 extern crate paho_mqtt as mqtt;
@@ -8,7 +9,10 @@ use std::sync::{Arc, Mutex};
 use std::time::Duration;
 use std::{process, thread};
 
-const TOPIC: &'static str = "iot2tangle";
+use once_cell::sync::Lazy;
+
+static TOPIC: Lazy<Mutex<StaticTopic>> =
+    Lazy::new(|| Mutex::new(StaticTopic::new(String::default())));
 
 fn on_connect_failure(_cli: &mqtt::AsyncClient, _msgid: u16, rc: i32) {
     println!("Connection attempt failed with error code {}.\n", rc);
@@ -16,8 +20,7 @@ fn on_connect_failure(_cli: &mqtt::AsyncClient, _msgid: u16, rc: i32) {
 }
 
 fn on_connect_success(cli: &mqtt::AsyncClient, _msgid: u16) {
-    println!("Connection succeeded");
-    cli.subscribe(TOPIC, 1);
+    cli.subscribe(TOPIC.lock().unwrap().get_topic(), 1);
 }
 
 ///
@@ -28,11 +31,13 @@ pub async fn start(
     password: String,
     broker_ip: String,
     broker_port: u16,
-    _topic: String,
+    topic: String,
     channel: Arc<Mutex<Channel>>,
     keystore: Arc<Mutex<KeyManager>>,
 ) -> () {
     let mut state = State::new(channel, keystore);
+
+    TOPIC.lock().unwrap().set_topic(topic.clone());
 
     let create_opts = mqtt::CreateOptionsBuilder::new()
         .server_uri(format!("{}:{}", broker_ip, broker_port))
@@ -61,8 +66,6 @@ pub async fn start(
         .password(password)
         .finalize();
 
-    // Attach a closure to the client to receive callback
-    // on incoming messages.
     cli.set_message_callback(move |_cli, msg| {
         if let Some(msg) = msg {
             let payload_str = msg.payload_str();
@@ -74,7 +77,7 @@ pub async fn start(
     cli.connect_with_callbacks(conn_opts, on_connect_success, on_connect_failure);
     println!(
         "Listening for topic: {} on http://{}:{}",
-        TOPIC, broker_ip, broker_port
+        topic, broker_ip, broker_port
     );
 
     // Just wait for incoming messages.
