@@ -526,7 +526,7 @@ dependencies = [
 [[package]]
 name = "gateway_core"
 version = "0.1.0"
-source = "git+https://github.com/iot2tangle/streams-gateway-core?branch=develop#2485697f442b277947d87e9a4737fc8a8c3d6fe6"
+source = "git+https://github.com/iot2tangle/streams-gateway-core?branch=develop#480dfd1ccbcf185c3c71e9ecc0dfbef5cc5d65a2"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -1684,8 +1684,6 @@ dependencies = [
  "base64",
  "failure",
  "gateway_core",
- "iota-conversion",
- "iota-streams",
  "once_cell",
  "paho-mqtt",
  "rand 0.7.3",
