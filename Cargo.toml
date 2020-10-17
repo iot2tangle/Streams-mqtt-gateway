@@ -11,9 +11,9 @@ path = "src/lib.rs"
 [dependencies]
 failure = "0.1.7"
 anyhow = { version = "1.0", default-features = false }
-iota-streams = { git = "https://github.com/iotaledger/streams"}
-gateway_core = { git = "https://github.com/iot2tangle/streams-gateway-core", branch="master"}
-iota-core = { git = "https://github.com/iotaledger/iota.rs", rev = "03cf531" }
+gateway_core = { git = "https://github.com/iot2tangle/streams-gateway-core", branch="develop"}
+iota-streams = { git = "https://github.com/iotaledger/streams", rev = "456347a"}
+iota-core = { git = "https://github.com/iotaledger/iota.rs", rev = "74fa529" } 
 iota-conversion = { git = "https://github.com/iotaledger/iota.rs", rev = "03cf531" }
 serde = {version="1.0.110", features = ["derive"] }
 serde_derive = "1.0.110"
