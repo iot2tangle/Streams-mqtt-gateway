@@ -526,14 +526,13 @@ dependencies = [
 [[package]]
 name = "gateway_core"
 version = "0.1.0"
-source = "git+https://github.com/iot2tangle/streams-gateway-core?branch=develop#480dfd1ccbcf185c3c71e9ecc0dfbef5cc5d65a2"
+source = "git+https://github.com/iot2tangle/streams-gateway-core?branch=master#3e98e2872f474fb5eb4a6f32d8dc9bc1d669c500"
 dependencies = [
  "anyhow",
  "async-trait",
  "base64",
  "chrono",
  "failure",
- "iota-conversion",
  "iota-core",
  "iota-streams",
  "rand 0.7.3",
@@ -764,21 +763,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "87bd27fb99929629a01f3b596c93aec5b6609854c882c45f9b5ded9cc0e24f61"
 
 [[package]]
-name = "iota-constants"
-version = "0.2.1"
-source = "git+https://github.com/iotaledger/iota.rs?rev=03cf531#03cf531e0cdc09c474b5f4cf9474b958ef5f5789"
-
-[[package]]
-name = "iota-conversion"
-version = "0.5.1"
-source = "git+https://github.com/iotaledger/iota.rs?rev=03cf531#03cf531e0cdc09c474b5f4cf9474b958ef5f5789"
-dependencies = [
- "failure",
- "iota-constants 0.2.1 (git+https://github.com/iotaledger/iota.rs?rev=03cf531)",
- "lazy_static",
-]
-
-[[package]]
 name = "iota-core"
 version = "0.2.0-alpha.3"
 source = "git+https://github.com/iotaledger/iota.rs?rev=74fa529#74fa529402dcfe1106e7954db057a5c5964aa43d"
@@ -793,7 +777,7 @@ dependencies = [
 [[package]]
 name = "iota-streams"
 version = "1.0.0"
-source = "git+https://github.com/iotaledger/streams?rev=456347a#456347aa4a1b7bde0d4468f1b044071c0ca7d9a8"
+source = "git+https://github.com/iotaledger/streams?rev=04cfe80#04cfe80065140d2fce1f1856c4acec55452bf2f1"
 dependencies = [
  "iota-streams-app",
  "iota-streams-app-channels",
@@ -806,14 +790,14 @@ dependencies = [
 [[package]]
 name = "iota-streams-app"
 version = "1.0.0"
-source = "git+https://github.com/iotaledger/streams?rev=456347a#456347aa4a1b7bde0d4468f1b044071c0ca7d9a8"
+source = "git+https://github.com/iotaledger/streams?rev=04cfe80#04cfe80065140d2fce1f1856c4acec55452bf2f1"
 dependencies = [
  "anyhow",
  "bee-crypto",
  "bee-transaction",
  "chrono",
  "hex",
- "iota-constants 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "iota-constants",
  "iota-core",
  "iota-streams-core",
  "iota-streams-core-edsig",
@@ -825,7 +809,7 @@ dependencies = [
 [[package]]
 name = "iota-streams-app-channels"
 version = "1.0.0"
-source = "git+https://github.com/iotaledger/streams?rev=456347a#456347aa4a1b7bde0d4468f1b044071c0ca7d9a8"
+source = "git+https://github.com/iotaledger/streams?rev=04cfe80#04cfe80065140d2fce1f1856c4acec55452bf2f1"
 dependencies = [
  "anyhow",
  "hex",
@@ -839,7 +823,7 @@ dependencies = [
 [[package]]
 name = "iota-streams-core"
 version = "0.3.0"
-source = "git+https://github.com/iotaledger/streams?rev=456347a#456347aa4a1b7bde0d4468f1b044071c0ca7d9a8"
+source = "git+https://github.com/iotaledger/streams?rev=04cfe80#04cfe80065140d2fce1f1856c4acec55452bf2f1"
 dependencies = [
  "digest",
  "hashbrown 0.8.2",
@@ -850,7 +834,7 @@ dependencies = [
 [[package]]
 name = "iota-streams-core-edsig"
 version = "0.2.0"
-source = "git+https://github.com/iotaledger/streams?rev=456347a#456347aa4a1b7bde0d4468f1b044071c0ca7d9a8"
+source = "git+https://github.com/iotaledger/streams?rev=04cfe80#04cfe80065140d2fce1f1856c4acec55452bf2f1"
 dependencies = [
  "curve25519-dalek",
  "ed25519-dalek",
@@ -862,7 +846,7 @@ dependencies = [
 [[package]]
 name = "iota-streams-core-keccak"
 version = "0.3.0"
-source = "git+https://github.com/iotaledger/streams?rev=456347a#456347aa4a1b7bde0d4468f1b044071c0ca7d9a8"
+source = "git+https://github.com/iotaledger/streams?rev=04cfe80#04cfe80065140d2fce1f1856c4acec55452bf2f1"
 dependencies = [
  "iota-streams-core",
  "keccak",
@@ -871,7 +855,7 @@ dependencies = [
 [[package]]
 name = "iota-streams-ddml"
 version = "0.2.2"
-source = "git+https://github.com/iotaledger/streams?rev=456347a#456347aa4a1b7bde0d4468f1b044071c0ca7d9a8"
+source = "git+https://github.com/iotaledger/streams?rev=04cfe80#04cfe80065140d2fce1f1856c4acec55452bf2f1"
 dependencies = [
  "anyhow",
  "hashbrown 0.8.2",
