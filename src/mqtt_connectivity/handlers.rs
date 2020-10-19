@@ -10,14 +10,14 @@ use gateway_core::gateway::publisher::Channel;
 /// It authenticates the device through the "device" attribute, and if successfull published the data to the Tangle
 /// through the streams channel
 ///
-pub async fn handle_sensor_data(
-    data: Vec<u8>,
+pub fn handle_sensor_data(
+    data: String,
     channel: &Arc<Mutex<Channel>>,
     keystore: &Arc<Mutex<KeyManager>>,
 ) -> () {
     let data = data.to_owned();
-    let clean_str = std::str::from_utf8(&data).unwrap().replace("\u{0}", "");
-    let json_data: serde_json::Result<SensorData> = serde_json::from_str(&clean_str);
+    //let clean_str = std::str::from_utf8(&data).unwrap().replace("\u{0}", "");
+    let json_data: serde_json::Result<SensorData> = serde_json::from_str(&data);
     match json_data {
         Ok(mut sensor_data) => {
             let hash = keystore

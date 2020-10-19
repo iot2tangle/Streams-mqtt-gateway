@@ -7,6 +7,7 @@ Make sure you also have the build dependencies installed, if not run:
 `sudo apt install build-essential`  
 `sudo apt install pkg-config`  
 `sudo apt install libssl-dev`  
+`sudo apt install cmake`  
 `sudo apt update`  
 
 
@@ -49,9 +50,9 @@ This starts the server which will forward messages from the devices to the Tangl
 The Output will be something like this:  
 
 `>> Starting.... `  
-`>> Channel root: "ab3de895ec41c88bd917e8a47d54f76d52794d61ff4c4eb3569c31f619ee623d0000000000000000"`  
+`>> Channel root: "47d504e1a825e142dd899dda81ff787c7cfad3b83977feec3545eaef4315c8a50000000000000000:fd93e57d937910f429cdd211"`  
   
-`>> To read the messages copy the channel root into http://iot2tangle.link/ `  
+`>> To read the messages copy the channel root into https://explorer.iot2tangle.io/`  
   
 `>> Listening for topic iot2tangle on http://localhost:1883`  
  

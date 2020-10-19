@@ -6,8 +6,6 @@ use local::types::config::Config;
 use std::fs::File;
 use std::sync::{Arc, Mutex};
 
-use iota_streams::app::transport::tangle::client::SendTrytesOptions;
-
 #[tokio::main]
 async fn main() -> () {
     //read configuration file
@@ -17,17 +15,20 @@ async fn main() -> () {
 
     println!("Starting....");
 
-    let mut send_opt = SendTrytesOptions::default();
-    send_opt.min_weight_magnitude = config.mwm;
-    send_opt.local_pow = config.local_pow;
-
-    let channel = Arc::new(Mutex::new(Channel::new(config.node, send_opt, None)));
-    let addr = match channel.lock().expect("").open() {
+    let channel = Arc::new(Mutex::new(Channel::new(
+        config.node,
+        config.mwm,
+        config.local_pow,
+        None,
+    )));
+    let (addr, msg) = match channel.lock().expect("").open() {
         Ok(a) => a,
         Err(_) => panic!("Could not connect to IOTA Node, try with another node!"),
     };
-    println!("Channel root: {:?}", addr);
-    println!("\n To read the messages copy the channel root into https://explorer.iot2tangle.io/ \n ");
+    println!("Channel root: {:?}", format!("{}:{}", addr, msg));
+    println!(
+        "\n To read the messages copy the channel root into https://explorer.iot2tangle.io/ \n "
+    );
 
     let store = Arc::new(Mutex::new(store));
 

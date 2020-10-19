@@ -11,18 +11,13 @@ path = "src/lib.rs"
 [dependencies]
 failure = "0.1.7"
 anyhow = { version = "1.0", default-features = false }
-iota-streams = { git = "https://github.com/iotaledger/streams"}
-iota-core = { git = "https://github.com/iotaledger/iota.rs", rev = "03cf531" }
-iota-conversion = { git = "https://github.com/iotaledger/iota.rs", rev = "03cf531" }
 gateway_core = { git = "https://github.com/iot2tangle/streams-gateway-core", branch="master"}
 serde = {version="1.0.110", features = ["derive"] }
 serde_derive = "1.0.110"
 serde_json = "1.0.53"
 tokio = {version = "0.2.18", features = ["macros"]}
-rumqtt = "0.31.0"
-crossbeam-channel = "0.4.4"
 rust-crypto = "0.2.36"
 rand = "0.7.3"
 base64 = "^0.12"
-
-
+paho-mqtt = "0.7.1"
+once_cell = "1.4.1"
