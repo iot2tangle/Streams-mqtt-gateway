@@ -8,7 +8,6 @@
     "broker_ip": "localhost",
     "broker_port": 1883,
     "topic": "iot2tangle",
-    "node": "https://nodes.thetangle.org:443",
-    "mwm": 14,
+    "node": "https://chrysalis-nodes.iota.cafe:443",
     "local_pow": false
 }

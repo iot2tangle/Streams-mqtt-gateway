@@ -10,6 +10,5 @@ pub struct Config {
     pub broker_port: u16,
     pub topic: String,
     pub node: String,
-    pub mwm: u8,
     pub local_pow: bool,
 }

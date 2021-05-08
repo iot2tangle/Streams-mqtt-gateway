@@ -17,7 +17,6 @@ async fn main() -> () {
 
     let channel = Arc::new(Mutex::new(Channel::new(
         config.node,
-        config.mwm,
         config.local_pow,
         None,
     )));
